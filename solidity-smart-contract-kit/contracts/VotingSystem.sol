@@ -15,5 +15,9 @@ contract VotingSystem {
         emit VoteCast(msg.sender, _candidate);
     }
 
-    // Other functions such as getVoteCount, etc.
+    // Additional function to retrieve vote count for a candidate
+    function getVoteCount(bytes32 _candidate) public view returns (uint256) {
+        return voteCount[_candidate];
+    }
 }
+
