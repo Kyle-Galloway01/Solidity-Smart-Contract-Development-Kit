@@ -23,11 +23,29 @@ contract Token {
         require(_to != address(0), "Invalid address");
         require(balanceOf[msg.sender] >= _value, "Insufficient balance");
 
-        balanceOf[msg.sender] -= _value;
-        balanceOf[_to] += _value;
-        emit Transfer(msg.sender, _to, _value);
+        _transfer(msg.sender, _to, _value);
         return true;
     }
 
-    // TODO: Other functions such as approve, transferFrom, etc.
+    function _transfer(address _from, address _to, uint256 _value) internal {
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        emit Transfer(_from, _to, _value);
+    }
+
+    function approve(address _spender, uint256 _value) public returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
+
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+        require(_from != address(0) && _to != address(0), "Invalid addresses");
+        require(balanceOf[_from] >= _value && allowance[_from][msg.sender] >= _value, "Insufficient allowance or balance");
+
+        _transfer(_from, _to, _value);
+        allowance[_from][msg.sender] -= _value;
+        return true;
+    }
 }
+
