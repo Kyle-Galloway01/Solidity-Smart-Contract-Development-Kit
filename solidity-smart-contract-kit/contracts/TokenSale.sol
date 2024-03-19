@@ -8,7 +8,7 @@ contract TokenSale {
     uint256 public tokenPrice;
     uint256 public tokensSold;
 
-    event Sell(address _buyer, uint256 _amount);
+    event Sell(address indexed buyer, uint256 indexed amount);
 
     constructor(Token _tokenContract, uint256 _tokenPrice) {
         owner = payable(msg.sender);
@@ -26,5 +26,11 @@ contract TokenSale {
         emit Sell(msg.sender, _numberOfTokens);
     }
 
-    // Other functions such as endSale, withdraw, etc.
+    function endSale() public {
+        require(msg.sender == owner, "Only owner can end sale");
+        require(tokenContract.transfer(owner, tokenContract.balanceOf(address(this))), "Token transfer failed");
+
+        // Transfer ether balance to owner
+        owner.transfer(address(this).balance);
+    }
 }
