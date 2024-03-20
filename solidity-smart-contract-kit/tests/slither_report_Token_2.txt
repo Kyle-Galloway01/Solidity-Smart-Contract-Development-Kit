@@ -1,0 +1,17 @@
+INFO:Detectors:
+Pragma version^0.8.0 (Token.sol#1) allows old versions
+solc-0.8.11 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+INFO:Detectors:
+Parameter Token.transfer(address,uint256)._to (Token.sol#23) is not in mixedCase
+Parameter Token.transfer(address,uint256)._value (Token.sol#23) is not in mixedCase
+Parameter Token.approve(address,uint256)._spender (Token.sol#33) is not in mixedCase
+Parameter Token.approve(address,uint256)._value (Token.sol#33) is not in mixedCase
+Parameter Token.transferFrom(address,address,uint256)._from (Token.sol#39) is not in mixedCase
+Parameter Token.transferFrom(address,address,uint256)._to (Token.sol#39) is not in mixedCase
+Parameter Token.transferFrom(address,address,uint256)._value (Token.sol#39) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+INFO:Detectors:
+Token.decimals (Token.sol#7) should be immutable 
+Token.totalSupply (Token.sol#6) should be immutable 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-immutable
