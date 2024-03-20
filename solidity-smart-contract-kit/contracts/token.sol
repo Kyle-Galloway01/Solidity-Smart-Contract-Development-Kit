@@ -1,4 +1,3 @@
-
 pragma solidity ^0.8.0;
 
 contract Token {
@@ -21,32 +20,32 @@ contract Token {
         balanceOf[msg.sender] = _totalSupply;
     }
 
-    function transfer(address _To, uint256 _Value) external returns (bool) {
-        require(_To != address(0), "Invalid address");
-        require(balanceOf[msg.sender] >= _Value, "Insufficient balance");
+    function transfer(address _to, uint256 _value) external returns (bool) {
+        require(_to != address(0), "Invalid address");
+        require(balanceOf[msg.sender] >= _value, "Insufficient balance");
         
-        balanceOf[msg.sender] -= _Value;
-        balanceOf[_To] += _Value;
-        emit Transfer(msg.sender, _To, _Value);
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
+        emit Transfer(msg.sender, _to, _value);
         return true;
     }
 
-    function approve(address _Spender, uint256 _Value) external returns (bool) {
-        allowance[msg.sender][_Spender] = _Value;
-        emit Approval(msg.sender, _Spender, _Value);
+    function approve(address _spender, uint256 _value) external returns (bool) {
+        allowance[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
-    function transferFrom(address _From, address _To, uint256 _Value) external returns (bool) {
-        require(_From != address(0), "Invalid sender address");
-        require(_To != address(0), "Invalid recipient address");
-        require(balanceOf[_From] >= _Value, "Insufficient balance");
-        require(allowance[_From][msg.sender] >= _Value, "Insufficient allowance");
+    function transferFrom(address _from, address _to, uint256 _value) external returns (bool) {
+        require(_from != address(0), "Invalid sender address");
+        require(_to != address(0), "Invalid recipient address");
+        require(balanceOf[_from] >= _value, "Insufficient balance");
+        require(allowance[_from][msg.sender] >= _value, "Insufficient allowance");
         
-        balanceOf[_From] -= _Value;
-        balanceOf[_To] += _Value;
-        allowance[_From][msg.sender] -= _Value;
-        emit Transfer(_From, _To, _Value);
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        allowance[_from][msg.sender] -= _value;
+        emit Transfer(_from, _to, _value);
         return true;
     }
 }
